@@ -4,7 +4,7 @@
 
  Update will come later
 
-It based on the following code
+It based on the following code [](https://www.carnetdumaker.net/articles/mesurer-une-temperature-avec-un-capteur-1-wire-ds18b20-et-une-carte-arduino-genuino/)
 
 ```
   // Code de retour de la fonction getTemperature()
