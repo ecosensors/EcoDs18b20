@@ -5,11 +5,11 @@
 It based on the following code [See more](https://www.carnetdumaker.net/articles/mesurer-une-temperature-avec-un-capteur-1-wire-ds18b20-et-une-carte-arduino-genuino/) (The following code may contains errors)
 
 ```
-	#include <OneWire.h>
+#include <OneWire.h>
 
-	const byte BROCHE_ONEWIRE = ds18b20_read;
+const byte BROCHE_ONEWIRE = ds18b20_read;
 
-	OneWire ds(BROCHE_ONEWIRE);
+OneWire ds(BROCHE_ONEWIRE);
 
   // Code de retour de la fonction getTemperature()
   enum DS18B20_RCODES {
