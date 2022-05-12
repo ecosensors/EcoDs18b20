@@ -122,3 +122,13 @@ It based on the following code
 }
 
 ```
+
+
+TODO:
+
+* Add corrected value into the library
+
+```
+float ds18b20_corrected(float *temperature, float rawLow, float referenceLow, float rawRange, float referenceRange){}
+```
+
