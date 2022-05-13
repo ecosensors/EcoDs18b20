@@ -2,7 +2,7 @@
  
  Library for the DS18B20, under development and without guarantee. Update will come later
 
-It's based on the following code [See more](https://www.carnetdumaker.net/articles/mesurer-une-temperature-avec-un-capteur-1-wire-ds18b20-et-une-carte-arduino-genuino/) (The following code may contains errors)
+It's based on the following code [See more](https://www.carnetdumaker.net/articles/mesurer-une-temperature-avec-un-capteur-1-wire-ds18b20-et-une-carte-arduino-genuino/)
 
 ```
 #include <OneWire.h>
@@ -29,7 +29,7 @@ OneWire ds(BROCHE_ONEWIRE);
   }
 
 /*
-* It's bette to power on the sensor only during measure. Wait about 750ms before taking a measure
+* It's better to power on the sensor only during measure. Wait about 750ms before taking a measure
 /*
 
   byte get_TemperatureSoil(float *temperature_soil, byte reset_search)
