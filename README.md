@@ -29,7 +29,7 @@ OneWire ds(BROCHE_ONEWIRE);
   }
 
 /*
-* DS18B29 must be powered only during meaure. Wait about 750ms before taking a measure
+* It's bette to power on the sensor only during measure. Wait about 750ms before taking a measure
 /*
 
   byte get_TemperatureSoil(float *temperature_soil, byte reset_search)
