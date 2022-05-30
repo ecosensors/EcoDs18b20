@@ -1,13 +1,7 @@
 /*
 * EcoSensors
-* Library for the DS18B20 (not tested for ther DS18x20 sensors)
-* Library biuld for the EcoLora board but work for other ARM Cotec MO ship
-* If you want to use it with another ship, you may change
-* pinMode(_pin_read2, INPUT_PULLUP); to pinMode(_pin_read2, INPUT);
-* The library is for 4 DS19B20 sensor on separate bus, but you can try to have up to 4 sensorsper bus.
-* I have not tested it for now
+* Library for the DS18B20 is still under developpent
 *
-* Thanks to // https://www.carnetdumaker.net/articles/mesurer-une-temperature-avec-un-capteur-1-wire-ds18b20-et-une-carte-arduino-genuino/
 */
 
 #include "Arduino.h"
