@@ -1,6 +1,6 @@
 /*
 * EcoSensors
-* Library for the DS18B20 is still under developpent
+* Library is still under developpent
 * 
 * 
 * 
