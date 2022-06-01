@@ -2,8 +2,8 @@
 #include <Ecods18b20.h>
 
 OneWire ds(19);               // read the sensors at the pin19 (A1)
-byte pinPower=10;
-byte pinRead=19; //A1
+byte pinPower = 10;
+byte pinRead = 19; //A1
 
 float temperature_soil;
 
