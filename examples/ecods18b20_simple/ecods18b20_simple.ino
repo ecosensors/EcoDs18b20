@@ -2,6 +2,13 @@
 #include <Ecods18b20.h>
 
 OneWire ds(19);               // read the sensors at the pin19 (A1)
+// Later, I will have to investigate how to adapt my code 1 or serveral pins where are connected other ds18b20 sensors
+// The idea is from a configuration file, I activate 3 sensors and the call will be change as this (for example)
+// OneWire ds[] = {19,14,15}
+// OneWire ds[] = {19,15}
+// OneWire ds[] = {14,15,16,17}
+
+
 byte pinPower = 10;
 byte pinRead = 19; //A1
 
