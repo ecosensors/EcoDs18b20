@@ -14,7 +14,7 @@ byte pinRead = 19; //A5
 
 float temperature_soil;
 
-Ecods18b20 ecods18b20;
+Ecods18b20 ecods18b20(&ds);
 
 void setup() {
 
@@ -29,7 +29,7 @@ void setup() {
   /* Test it */
   // Power the sensor
   
-  //expander.digitalWrite(station.tsoil_config.pinPower,HIGH)
+  //expander.digitalWrite(station.tsoil_config.pinPower,HIGH);
   digitalWrite(pinPower,HIGH);
 
   if(ecods18b20.get_temperature(&temperature_soil, true)==1)
@@ -38,7 +38,7 @@ void setup() {
   }
   
   digitalWrite(pinPower,LOW);
-  //expander.digitalWrite(station.tsoil_config.pinPower,HIGH)
+  //expander.digitalWrite(station.tsoil_config.pinPower,HIGH);
 
 }
 

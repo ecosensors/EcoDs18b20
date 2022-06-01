@@ -36,15 +36,11 @@
 /*
 * The code is under developement
 */
-Ecods18b20::Ecods18b20()
+Ecods18b20::Ecods18b20(OneWire* ds)
 {
+	_wire = ds;
 }
 
-void Ecods18b20::start(OneWire* ds)
-{
-	_ds = ds;
-
-}
 /*
 * 1 = READ_OK
 * 0 = NO_SENSOR_FOUND
@@ -61,48 +57,46 @@ int Ecods18b20::get_temperature(float *temperature_soil, bool reset_search)
     // addr[] : Adresse du module 1-Wire détecté  
     // Reset le bus 1-Wire ci nécessaire (requis pour la lecture du premier capteur)
     
-    Serial.print(F("1"));
     if (reset_search) {
-     	Serial.print(F("2"));
-     	_ds->reset_search();
+     	_wire->reset_search();
      }
      
       // Recherche le prochain capteur 1-Wire disponible
-     if (!_ds->search(addr)) {
+     if (!_wire->search(addr)) {
         // Pas de capteur
      	return 0;
      }   
-     Serial.print(F("3"));
+    
       // Vérifie que l'adresse a été correctement reçue 
      if (OneWire::crc8(addr, 7) != addr[7])
      {
      	// Adresse invalide
      	return -1;
      }
-     Serial.print(F("4"));
+  
      // Vérifie qu'il s'agit bien d'un DS18B20 
      if (addr[0] != 0x28)
      {
      	return -2;
      }
      // Reset le bus 1-Wire et sélectionne le capteur
-     _ds->reset();
-     _ds->select(addr);
-    Serial.print(F("5"));
+     _wire->reset();
+     _wire->select(addr);
+    
      // Lance une prise de mesure de température et attend la fin de la mesure
-     _ds->write(0x44, 1);
+     _wire->write(0x44, 1);
      delay(800);
     
      // Reset le bus 1-Wire, sélectionne le capteur et envoie une demande de lecture du scratchpad
-     _ds->reset();
-     _ds->select(addr);
-     _ds->write(0xBE);
-   Serial.print(F("6"));
+     _wire->reset();
+     _wire->select(addr);
+     _wire->write(0xBE);
+   
       // Lecture du scratchpad
     for (byte i = 0; i < 9; i++) {
-     	data[i] = _ds->read();
+     	data[i] = _wire->read();
     }
-    Serial.print(F("10"));
+    
     // Calcul de la température en degré Celsius 
     *temperature_soil = (int16_t) ((data[1] << 8) | data[0]) * 0.0625;
 
