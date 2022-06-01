@@ -30,6 +30,12 @@
 * pin_read3: Define here the pin which will read the value of the third sensor or NULL if you dont
 * pin_read4: Define here the pin which will read the value of the fourth sensor or NULL if you dont
 */
+
+
+
+/*
+* The code is under developement
+*/
 Ecods18b20::Ecods18b20()
 {
 }
@@ -105,6 +111,11 @@ int Ecods18b20::get_temperature(float *temperature_soil, bool reset_search)
     return 1;
 }
 
+
+
+/*
+* Ignore the code below
+*/
 Ecods18b20::Ecods18b20(byte pin_read1, byte pin_read2, byte pin_read3, byte pin_read4)
 {
 	_pin_read1 = pin_read1;
