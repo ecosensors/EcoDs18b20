@@ -2,6 +2,8 @@
  
  Library for the DS18B20, under development and without guarantee. Update will come later
 
+ For now, it only works for one sensor
+
 It's based on the following code [See more](https://www.carnetdumaker.net/articles/mesurer-une-temperature-avec-un-capteur-1-wire-ds18b20-et-une-carte-arduino-genuino/)
 
 ```

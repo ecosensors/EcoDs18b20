@@ -30,6 +30,78 @@
 * pin_read3: Define here the pin which will read the value of the third sensor or NULL if you dont
 * pin_read4: Define here the pin which will read the value of the fourth sensor or NULL if you dont
 */
+Ecods18b20::Ecods18b20()
+{
+}
+
+void Ecods18b20::begin(OneWire* ds)
+{
+	_ds = ds;
+
+}
+/*
+* 1 = READ_OK
+* 0 = NO_SENSOR_FOUND
+* -1 = INVALID_ADDRESS
+* -2 = INVALID_SENSOR
+*/
+int Ecods18b20::get_temperature(float *temperature_soil, byte reset_search)
+{
+	Serial.println(F("\r\nGetting temperature"));
+    Serial.println(F("******************************"));
+    
+    delay(500);
+    byte data[9], addr[8];
+      // data[] : Données lues depuis le scratchpad
+      // addr[] : Adresse du module 1-Wire détecté  
+      // Reset le bus 1-Wire ci nécessaire (requis pour la lecture du premier capteur)
+      if (reset_search) {
+        _ds->reset_search();
+      }
+      // Recherche le prochain capteur 1-Wire disponible
+      if (!_ds->search(addr)) {
+        // Pas de capteur
+        return 0;
+      }   
+      
+      // Vérifie que l'adresse a été correctement reçue 
+      if (OneWire::crc8(addr, 7) != addr[7])
+      {
+        // Adresse invalide
+        return -1;
+      }
+
+      // Vérifie qu'il s'agit bien d'un DS18B20 
+      if (addr[0] != 0x28)
+      {
+        return -2;
+      }
+      // Reset le bus 1-Wire et sélectionne le capteur
+      _ds->reset();
+      _ds->select(addr);
+    
+      // Lance une prise de mesure de température et attend la fin de la mesure
+      _ds->write(0x44, 1);
+      delay(800);
+    
+      // Reset le bus 1-Wire, sélectionne le capteur et envoie une demande de lecture du scratchpad
+      _ds->reset();
+      _ds->select(addr);
+      _ds->write(0xBE);
+   
+      // Lecture du scratchpad
+      for (byte i = 0; i < 9; i++) {
+      data[i] = _ds->read();
+    }
+     
+    // Calcul de la température en degré Celsius 
+    *temperature_soil = (int16_t) ((data[1] << 8) | data[0]) * 0.0625;
+
+    // Pas d'erreur
+
+    return 1;
+}
+
 Ecods18b20::Ecods18b20(byte pin_read1, byte pin_read2, byte pin_read3, byte pin_read4)
 {
 	_pin_read1 = pin_read1;

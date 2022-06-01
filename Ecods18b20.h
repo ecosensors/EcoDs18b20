@@ -3,11 +3,14 @@
 #ifndef Ecods18b20_h
 #define Ecods18b20_h
 
+#include <OneWire.h>
 
 class Ecods18b20{
  	protected:
 
  	private:
+ 		OneWire* _ds;
+
  		byte _pin_read1;
  		byte _pin_read2;
  		byte _pin_read3;
@@ -16,7 +19,11 @@ class Ecods18b20{
  		byte _sensorsAddr[4][4][8];
 	
 	public:
+		Ecods18b20();
 		Ecods18b20(byte read1, byte raed2, byte read3, byte read4);
+		void begin(OneWire* ds);
+		int get_temperature(float *temperature_soil, byte reset_search);
+
 		void begin();
 		void scan(byte readPin);
 		int read(float *temperature, byte readPin, bool reset_search);
