@@ -21,8 +21,8 @@ class Ecods18b20{
 	public:
 		Ecods18b20();
 		Ecods18b20(byte read1, byte raed2, byte read3, byte read4);
-		void begin(OneWire* ds);
-		int get_temperature(float *temperature_soil, byte reset_search);
+		void start(OneWire* ds);
+		int get_temperature(float *temperature_soil, bool reset_search);
 
 		void begin();
 		void scan(byte readPin);

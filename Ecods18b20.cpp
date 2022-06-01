@@ -34,7 +34,7 @@ Ecods18b20::Ecods18b20()
 {
 }
 
-void Ecods18b20::begin(OneWire* ds)
+void Ecods18b20::start(OneWire* ds)
 {
 	_ds = ds;
 
@@ -45,55 +45,58 @@ void Ecods18b20::begin(OneWire* ds)
 * -1 = INVALID_ADDRESS
 * -2 = INVALID_SENSOR
 */
-int Ecods18b20::get_temperature(float *temperature_soil, byte reset_search)
+int Ecods18b20::get_temperature(float *temperature_soil, bool reset_search)
 {
 	Serial.println(F("\r\nGetting temperature"));
-    Serial.println(F("******************************"));
     
     delay(500);
     byte data[9], addr[8];
-      // data[] : Données lues depuis le scratchpad
-      // addr[] : Adresse du module 1-Wire détecté  
-      // Reset le bus 1-Wire ci nécessaire (requis pour la lecture du premier capteur)
-      if (reset_search) {
-        _ds->reset_search();
-      }
-      // Recherche le prochain capteur 1-Wire disponible
-      if (!_ds->search(addr)) {
-        // Pas de capteur
-        return 0;
-      }   
-      
-      // Vérifie que l'adresse a été correctement reçue 
-      if (OneWire::crc8(addr, 7) != addr[7])
-      {
-        // Adresse invalide
-        return -1;
-      }
-
-      // Vérifie qu'il s'agit bien d'un DS18B20 
-      if (addr[0] != 0x28)
-      {
-        return -2;
-      }
-      // Reset le bus 1-Wire et sélectionne le capteur
-      _ds->reset();
-      _ds->select(addr);
+    // data[] : Données lues depuis le scratchpad
+    // addr[] : Adresse du module 1-Wire détecté  
+    // Reset le bus 1-Wire ci nécessaire (requis pour la lecture du premier capteur)
     
-      // Lance une prise de mesure de température et attend la fin de la mesure
-      _ds->write(0x44, 1);
-      delay(800);
-    
-      // Reset le bus 1-Wire, sélectionne le capteur et envoie une demande de lecture du scratchpad
-      _ds->reset();
-      _ds->select(addr);
-      _ds->write(0xBE);
-   
-      // Lecture du scratchpad
-      for (byte i = 0; i < 9; i++) {
-      data[i] = _ds->read();
-    }
+    Serial.print(F("1"));
+    if (reset_search) {
+     	Serial.print(F("2"));
+     	_ds->reset_search();
+     }
      
+      // Recherche le prochain capteur 1-Wire disponible
+     if (!_ds->search(addr)) {
+        // Pas de capteur
+     	return 0;
+     }   
+     Serial.print(F("3"));
+      // Vérifie que l'adresse a été correctement reçue 
+     if (OneWire::crc8(addr, 7) != addr[7])
+     {
+     	// Adresse invalide
+     	return -1;
+     }
+     Serial.print(F("4"));
+     // Vérifie qu'il s'agit bien d'un DS18B20 
+     if (addr[0] != 0x28)
+     {
+     	return -2;
+     }
+     // Reset le bus 1-Wire et sélectionne le capteur
+     _ds->reset();
+     _ds->select(addr);
+    Serial.print(F("5"));
+     // Lance une prise de mesure de température et attend la fin de la mesure
+     _ds->write(0x44, 1);
+     delay(800);
+    
+     // Reset le bus 1-Wire, sélectionne le capteur et envoie une demande de lecture du scratchpad
+     _ds->reset();
+     _ds->select(addr);
+     _ds->write(0xBE);
+   Serial.print(F("6"));
+      // Lecture du scratchpad
+    for (byte i = 0; i < 9; i++) {
+     	data[i] = _ds->read();
+    }
+    Serial.print(F("10"));
     // Calcul de la température en degré Celsius 
     *temperature_soil = (int16_t) ((data[1] << 8) | data[0]) * 0.0625;
 
