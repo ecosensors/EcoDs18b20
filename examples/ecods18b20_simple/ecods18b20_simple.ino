@@ -19,12 +19,14 @@ void setup() {
 
   // Test it
   // Power the sensor
+  //expander.digitalWrite(station.tsoil_config.pinPower,HIGH)
   digitalWrite(pinPower,HIGH);
   if(ecods18b20.get_temperature(&temperature_soil, true)==1)
   {
     Serial.print((int16_t)temperature_soil); Serial.println(F("C"));
   }
   digitalWrite(pinPower,LOW);
+  //expander.digitalWrite(station.tsoil_config.pinPower,HIGH)
 
 }
 
