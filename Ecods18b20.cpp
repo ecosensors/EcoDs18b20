@@ -12,7 +12,7 @@
 
 #include "Arduino.h"
 #include "Ecods18b20.h"
-#include <OneWire.h>
+
 
 /*
 * You can connect up to 4 DS18B20, either on the same BUS, or a different pin for each of them.
