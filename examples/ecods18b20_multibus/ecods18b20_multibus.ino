@@ -1,10 +1,10 @@
 /*
- * The scrpt is procided without garranty
+ * The scrpt is provided without garranty
  * and you may need to adapt it following your needs, specially if you
  * do not use a configuration file. (There is enough comment to do it :) )
  * 
- * NOTE: Serval OneWire sensor can be on the same bus. I wrote this code to respond to my needs because my board
- * do not have a commun wire, then all sensors are not on the bus/pin. But you can adapt it esly.
+ * NOTE: Serveral OneWire sensors can be on the same bus. I wrote this script to respond to my needs because my board
+ * do not have a commun wire, then all sensors are not on the bus/pin. But you can adapt it easly.
  * 
  */
  
@@ -21,7 +21,7 @@
   // I am using PCF8574 to power the DS18B20 sensors during a measure
 #endif
 
-OneWire onewire(19);        // read the sensors at the pin 19 (A1). It's require to define a pin here
+OneWire onewire(19);        // read the sensors at the pin 19 (A1). It's required to define a pin here
 
 // byte pinPower1=10;
 // byte pinRead1=19; //A1
@@ -46,13 +46,14 @@ void setup() {
   #if defined(PCF)
     Wire.begin();                     // Wire is ony needed because of the PCF8574
     Serial.println(F("# PCF8574"));
+    
     // Igone the following lines if you are not using a PCF8574
-    expander.begin(0x27);             // Start PCF8574 with it address
+    expander.begin(0x27);                     // Start PCF8574 with it address
 
     for (int p = 1; p < 7; p++)
     {
-      expander.pinMode(p, OUTPUT);    // Define the pin (1-6)
-      expander.digitalWrite(p, LOW);  // Put pin LOW
+      expander.pinMode(p, OUTPUT);            // Define the pin (1-6)
+      expander.digitalWrite(p, LOW);          // Put pin LOW
       delay(50);
       Serial.print(p); Serial.print(F(":"));
       Serial.println(expander.digitalRead(p) ? "HIGH" : "LOW");
