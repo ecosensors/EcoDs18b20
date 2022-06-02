@@ -62,17 +62,15 @@ void setup() {
   #endif
 
   /*
-   * // If you have other DS18B20 in another bus, 
-   * // you need to setup the pinMode for those pin
+   * // If you have other DS18B20 sensors in another bus, you need to setup the pinMode for each of them
    * pinMode(pinPower1, OUTPUT);
    * digitalWrite(pinPower1,LOW);
    * pinMode(pinRead1, INPUT_PULLUP);
   */
 
   /*
-   * I am using a configuration file to configure the pin of my sensor.
+   * I am using a configuration file to configure the pins of my sensors.
    * You may not have a configuration, then comment those lines and uncomment the lines above. 
-   * You can setup other pinMode
    */
 
     Serial.println(F("\r\n# pinMode as INPUT_PULLUP"));
