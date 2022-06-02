@@ -1,12 +1,6 @@
 /*
 * EcoSensors
-* Library is still under developpent
-* 
-* 
-* 
-* 
-* 
-*
+* Library is distributed  WITHOUT WARRANTY
 * 
 */
 
@@ -16,7 +10,7 @@
 
 /*
 * You can connect up to 4 DS18B20, either on the same BUS, or a different pin for each of them.
-* YOU MUST DEFINE THE Pin numer https://learn.adafruit.com/adafruit-feather-m0-adalogger/pinouts
+* YOU MUST DEFINE THE Pin number https://learn.adafruit.com/adafruit-feather-m0-adalogger/pinouts
 * Expl:
 * A0 => 14
 * A1 => 15
@@ -25,17 +19,8 @@
 * A4 => 18
 * A5 => 19
 * 
-* pin_read1: Define here the pin which will read the value of the first sensor or NULL if you dont
-* pin_read2: Define here the pin which will read the value of the second sensor or NULL if you dont
-* pin_read3: Define here the pin which will read the value of the third sensor or NULL if you dont
-* pin_read4: Define here the pin which will read the value of the fourth sensor or NULL if you dont
 */
 
-
-
-/*
-* The code is under developement
-*/
 Ecods18b20::Ecods18b20()
 {
 }

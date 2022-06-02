@@ -1,5 +1,5 @@
 /*
- * The scrpt is provided without garranty
+ * The scrpt is distributed  WITHOUT WARRANTY
  * and you may need to adapt it following your needs, specially if you
  * do not use a configuration file. (There is enough comment to do it :) )
  * 

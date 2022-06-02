@@ -1,4 +1,9 @@
 
+/*
+* EcoSensors
+* Library is distributed  WITHOUT WARRANTY
+* 
+*/
 
 #ifndef Ecods18b20_h
 #define Ecods18b20_h
@@ -20,10 +25,9 @@ class Ecods18b20{
 	
 	public:
 		Ecods18b20();
-		Ecods18b20(byte read1, byte raed2, byte read3, byte read4);
-
 		int get_temperature(OneWire* ds, float *temperature_soil, bool reset_search);
 
+		Ecods18b20(byte read1, byte raed2, byte read3, byte read4);
 		void begin();
 		void scan(byte readPin);
 		int read(float *temperature, byte readPin, bool reset_search);

@@ -1,3 +1,7 @@
+/*
+* The scrpt is distributed  WITHOUT WARRANTY
+*/
+
 #include <OneWire.h>
 #include <Ecods18b20.h>
 
