@@ -1,7 +1,7 @@
 
 /*
 * EcoSensors
-* Library is distributed  WITHOUT WARRANTY
+* Library is distributed WITHOUT WARRANTY
 * 
 */
 
