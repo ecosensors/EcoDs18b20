@@ -65,7 +65,7 @@ void setup() {
    * // If you have other DS18B20 sensors in another bus, you need to setup the pinMode for each of them
    * pinMode(pinPower1, OUTPUT);
    * digitalWrite(pinPower1,LOW);
-   * pinMode(pinRead1, INPUT_PULLUP);
+   * pinMode(pinRead1, INPUT_PULLUP); (1-Wire data line)
   */
 
   /*
@@ -74,27 +74,27 @@ void setup() {
    */
 
     Serial.println(F("\r\n# pinMode as INPUT_PULLUP"));
-    // Checking if the firt sensor is activate and set the pinMode of read pin as INPUT_PULLUP
+    // Checking if the firt sensor is activate and set the pinMode of read pin as INPUT_PULLUP (1-Wire data line)
     if(station.bud1_active == true){
         pinMode(station.bud1_config.pinRead, INPUT_PULLUP);          // (A1)
     }
 
-    // Checking if the second sensor is activate and set the pinMode of read pin as INPUT_PULLUP
+    // Checking if the second sensor is activate and set the pinMode of read pin as INPUT_PULLUP (1-Wire data line)
     if(station.bud2_active == true){
       pinMode(station.bud2_config.pinRead, INPUT_PULLUP);          // (A2)
     }
 
-    // Checking if the third sensor is activate and set the pinMode of read pin as INPUT_PULLUP
+    // Checking if the third sensor is activate and set the pinMode of read pin as INPUT_PULLUP (1-Wire data line)
     if(station.bud3_active == true){
       pinMode(station.bud3_config.pinRead, INPUT_PULLUP);          // (A3)
     }
 
-    // Checking if the fourth sensor is activate and set the pinMode of read pin as INPUT_PULLUP
+    // Checking if the fourth sensor is activate and set the pinMode of read pin as INPUT_PULLUP (1-Wire data line)
     if(station.bud4_active == true){
       pinMode(station.bud4_config.pinRead, INPUT_PULLUP);          // (A4)
     }
     
-    // Checking if the last sensor is activate and set the pinMode of read pin as INPUT_PULLUP
+    // Checking if the last sensor is activate and set the pinMode of read pin as INPUT_PULLUP (1-Wire data line)
     if(station.temperature_soil_active == true){
       pinMode(station.tsoil_config.pinRead, INPUT_PULLUP);        // (A5)
     }
@@ -110,7 +110,7 @@ void setup() {
   if(station.bud1_active == true){
       Serial.println(F("\r\n# Read the sensors 1"));
       // Need to change for each new bus/pin
-      onewire.begin(station.bud1_config.pinRead);                   // Define the new bus
+      onewire.begin(station.bud1_config.pinRead);                   // Define the new bus (1-Wire data line)
       
       // Power the sensor
       #if defined(PCF)
@@ -142,7 +142,7 @@ void setup() {
 
 
   // Next we will read the fift sensor each 5 sec
-  onewire.begin(station.tsoil_config.pinRead);                   // Define the new bus
+  onewire.begin(station.tsoil_config.pinRead);                   // Define the new bus (1-Wire data line)
 }
 
 
