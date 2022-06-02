@@ -1,15 +1,19 @@
 # EcoDs18b20
  
- Library for the DS18B20, under development and without guarantee.
+ Library for the DS18B20 sensors, without guarantee.
 
- For now, it only works for one sensor
 
 
 ## TODO:
 
-* Add corrected value into the library
+
+Calibrating the value with Compensated value
 
 ```
 float ds18b20_corrected(float *temperature, float rawLow, float referenceLow, float rawRange, float referenceRange){}
 ```
 
+* float rawLow          => Measure the temperatire of the ice with the DS18B20
+* float referenceLow    => Measure the temprature of the ice with a reference accurate termometer
+* float rawRange        => Measure the temperatire of the boiled water with the DS18B20
+* float referenceRange  => Measure the temperatire of the boiled water with a reference accurate termometer
