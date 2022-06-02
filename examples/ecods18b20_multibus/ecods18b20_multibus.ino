@@ -10,18 +10,18 @@
  
 #include <OneWire.h>
 #include <Ecods18b20.h>
-#include "station-29.h"     // Configuration file
+#include "station-29.h"                     // Configuration file
 
-#define PCF                 // If you are using a PCF8574 (GPIO Port Expander)
-                            // If you don't, comment it
+#define PCF                                 // If you are using a PCF8574 (GPIO Port Expander)
+                                            // If you don't, comment it
 #if defined(PCF)
-  #include <Wire.h>         // Required for I2C communication
-  #include "PCF8574.h"      // Required for PCF857
+  #include <Wire.h>                         // Required for I2C communication
+  #include "PCF8574.h"                      // Required for PCF857
   PCF8574 expander;
   // I am using PCF8574 to power the DS18B20 sensors during a measure
 #endif
 
-OneWire onewire(19);        // read the sensors at the pin 19 (A1). It's required to define a pin here
+OneWire onewire(19);                        // read the sensors at the pin 19 (A1). It's required to define a pin here
 
 // byte pinPower1=10;
 // byte pinRead1=19; //A1
@@ -44,7 +44,7 @@ void setup() {
   Serial.println();
   
   #if defined(PCF)
-    Wire.begin();                     // Wire is ony needed because of the PCF8574
+    Wire.begin();                             // Wire is ony needed because of the PCF8574
     Serial.println(F("# PCF8574"));
     
     // Igone the following lines if you are not using a PCF8574
@@ -96,19 +96,20 @@ void setup() {
     
     // Checking if the last sensor is activate and set the pinMode of read pin as INPUT_PULLUP
     if(station.temperature_soil_active == true){
-      pinMode(station.tsoil_config.pinRead, INPUT_PULLUP);   // (A5)
+      pinMode(station.tsoil_config.pinRead, INPUT_PULLUP);        // (A5)
     }
+
 
   /*  
    *   Read the value of the DS18B20 sensors
-   */
-
-  /*
+   *
+   *
    * First sensor
    */
+
   if(station.bud1_active == true){
       Serial.println(F("\r\n# Read the sensors 1"));
-      // Need to chamg for each new bus/pin
+      // Need to change for each new bus/pin
       onewire.begin(station.bud1_config.pinRead);                   // Define the new bus
       
       // Power the sensor
@@ -136,7 +137,8 @@ void setup() {
       #endif
   } // END if(station.bud1_active == true){
 
-  // Copy/past and change the variables for the other sensors or check the function in the loop(); 
+  // Copy/past and change the variables for the other sensors 
+
 
 
   // Next we will read the fift sensor each 5 sec
@@ -145,10 +147,9 @@ void setup() {
 
 
 void loop() {
-  // Read the temperature of the soil each 5 second
 
    /*
-   * Fift sensor
+   * Read the temperature of fift DS18B20 sensor each 5 second
    */
   if(station.temperature_soil_active == true){
       Serial.println(F("\r\n# Read the sensors 5"));
@@ -156,7 +157,7 @@ void loop() {
       #if defined(PCF)
         expander.digitalWrite(station.tsoil_config.pinPower, HIGH);  // Put pin HIGH
       #else
-        digitalWrite(pinPower4,HIGH);       // You will ne define that pin above
+        digitalWrite(pinPower4,HIGH);                                // You will have to define that pin and the pinMod in the setup()
       #endif
 
       delay(1000);
@@ -173,11 +174,11 @@ void loop() {
       #if defined(PCF)
         expander.digitalWrite(station.tsoil_config.pinPower, LOW);  // Put pin LOW
       #else
-        digitalWrite(pinPower4,LOW);       // If you dont
+        digitalWrite(pinPower4,LOW);                                 // If you dont
       #endif
   } // END if(station.temperature_soil_active == true){
   
   delay(5000);
-  temperature_soil = 0;   // (Not really needed)
+  temperature_soil = 0;                                               // (Not really needed)
 
 }
