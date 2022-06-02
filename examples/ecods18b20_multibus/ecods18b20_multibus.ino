@@ -103,7 +103,6 @@ void setup() {
   /*  
    *   Read the value of the DS18B20 sensors
    *
-   *
    * First sensor
    */
 
