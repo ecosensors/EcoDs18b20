@@ -36,9 +36,8 @@
 /*
 * The code is under developement
 */
-Ecods18b20::Ecods18b20(OneWire* ds)
+Ecods18b20::Ecods18b20()
 {
-	_wire = ds;
 }
 
 /*
@@ -47,9 +46,11 @@ Ecods18b20::Ecods18b20(OneWire* ds)
 * -1 = INVALID_ADDRESS
 * -2 = INVALID_SENSOR
 */
-int Ecods18b20::get_temperature(float *temperature_soil, bool reset_search)
+int Ecods18b20::get_temperature(OneWire* ds, float *temperature_soil, bool reset_search)
 {
-	Serial.println(F("\r\nGetting temperature"));
+	_wire = ds; // Does it makes sens to do it
+
+	//Serial.println(F("Getting temperature"));
     
     delay(500);
     byte data[9], addr[8];
@@ -64,6 +65,7 @@ int Ecods18b20::get_temperature(float *temperature_soil, bool reset_search)
       // Recherche le prochain capteur 1-Wire disponible
      if (!_wire->search(addr)) {
         // Pas de capteur
+        Serial.println(F("No sensor found"));
      	return 0;
      }   
     
@@ -71,12 +73,14 @@ int Ecods18b20::get_temperature(float *temperature_soil, bool reset_search)
      if (OneWire::crc8(addr, 7) != addr[7])
      {
      	// Adresse invalide
+     	Serial.println(F("Invalid address"));
      	return -1;
      }
   
      // Vérifie qu'il s'agit bien d'un DS18B20 
      if (addr[0] != 0x28)
      {
+     	Serial.println(F("Invalid sensor"));
      	return -2;
      }
      // Reset le bus 1-Wire et sélectionne le capteur
