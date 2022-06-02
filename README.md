@@ -1,6 +1,7 @@
 # EcoDs18b20
  
  Library for the DS18B20 sensors is distributed WITHOUT WARRANTY.
+ 
  You will need a pull-up resistor of about 4.7 KOhm between the 1-Wire data line and the 3.3V
 
  Improvement will be done later :)
