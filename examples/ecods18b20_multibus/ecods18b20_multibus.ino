@@ -140,7 +140,7 @@ void setup() {
   // Copy/past and change the variables for the other sensors or check the function in the loop(); 
 
 
-  // Next we will read the fourth sensor each 5 sec
+  // Next we will read the fift sensor each 5 sec
   onewire.begin(station.tsoil_config.pinRead);                   // Define the new bus
 }
 
