@@ -116,10 +116,22 @@ int Ecods18b20::get_temperature(OneWire* ds, float *temperature_soil, bool reset
 }
 
 
+float Ecods18b20::corrected(float *temperature, float rawLow, float referenceLow, float rawRange, float referenceRange)
+{
+  //Return the calculate value following the calibration step
+  float correctedValue;
+
+  //RawRange = RawHigh - RawLow
+  //ReferenceRange = ReferenceHigh - ReferenceLow
+
+  correctedValue = (((*temperature - rawLow) * referenceRange) / rawRange) + referenceLow;
+  return correctedValue;
+}
 
 /*
 * Ignore the code below
 */
+/*
 Ecods18b20::Ecods18b20(byte pin_read1, byte pin_read2, byte pin_read3, byte pin_read4)
 {
 	_pin_read1 = pin_read1;
@@ -241,6 +253,7 @@ void Ecods18b20::scan(byte readPin)
       }while(s < 4);
 }
 /*
+/*
 * return:
 * 1 => OK
 * 0 => Mo sensor found
@@ -248,6 +261,7 @@ void Ecods18b20::scan(byte readPin)
 * -2 => Wrong sensor. It's not a DS18B20
 *
 */
+/*
 int Ecods18b20::read(float *temperature, byte readPin, bool reset_search)
 {
 	//Serial.print(F("DEBUG read:")); Serial.println(readPin);
@@ -366,3 +380,4 @@ bool Ecods18b20::read4(float *temperature)
 	if(_pin_read4 != NULL)
 		return true;
 }
+*/
