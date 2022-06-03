@@ -118,7 +118,7 @@ void setup() {
         digitalWrite(pinPower1,HIGH);       // If you dont
       #endif
 
-      delay(1000);
+      delay(750);
       
       // Read the value
       if(ecods18b20.get_temperature(&onewire, &temperature_soil, true)==1)
@@ -159,7 +159,7 @@ void loop() {
         digitalWrite(pinPower4,HIGH);                                // You will have to define that pin and the pinMod in the setup()
       #endif
 
-      delay(1000);
+      delay(750);
       
       // Read the value
       if(ecods18b20.get_temperature(&onewire, &temperature_soil, true)==1)
