@@ -52,7 +52,28 @@ int Ecods18b20::get_temperature(OneWire* ds, float *temperature_soil, bool reset
         // Pas de capteur
         Serial.println(F("No sensor found"));
      	return 0;
-     }   
+     }
+     else
+     {
+     	switch (addr[0]) {
+	  		case 0x10:
+	    		Serial.println("  Chip = DS18S20");  // or old DS1820
+	      		type_s = 1;
+	      		break;
+			case 0x28:
+	    		Serial.println("  Chip = DS18B20");
+	      		type_s = 0;
+	      		break;
+			case 0x22:
+	    		Serial.println("  Chip = DS1822");
+	      		type_s = 0;
+	      		break;
+	    	default:
+	    		Serial.println("Device is not a DS18x20 family device.");
+	    		return -2;
+	  	} 
+
+     }	
     
       // Vérifie que l'adresse a été correctement reçue 
      if (OneWire::crc8(addr, 7) != addr[7])
@@ -68,6 +89,9 @@ int Ecods18b20::get_temperature(OneWire* ds, float *temperature_soil, bool reset
      	Serial.println(F("Invalid sensor"));
      	return -2;
      }
+
+     // the first ROM byte indicates which chip
+	
      // Reset le bus 1-Wire et sélectionne le capteur
      _wire->reset();
      _wire->select(addr);
