@@ -11,7 +11,7 @@
  Improvement will be done very soon :)
 
 
-## Temperature with te compensated value
+## Temperature with a compensated value
 
 ```
 float ecods18b20.corrected(float *temperature, float rawLow, float referenceLow, float rawRange, float referenceRange){}
