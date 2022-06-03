@@ -17,7 +17,7 @@
 float ecods18b20.corrected(float *temperature, float rawLow, float referenceLow, float rawRange, float referenceRange){}
 ```
 
-* temperature           => the temperature return nby te DS18b20 sensor
+* temperature           => the temperature return by the DS18B20 sensor
 * float rawLow          => Measure the temperatire of the ice with the DS18B20
 * float referenceLow    => Measure the temprature of the ice with a reference accurate termometer
 * float rawRange        => Measure the temperatire of the boiled water with the DS18B20
