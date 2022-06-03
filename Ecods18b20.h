@@ -32,6 +32,6 @@ class Ecods18b20{
 		Ecods18b20();
 		int get_temperature(OneWire* ds, float *temperature_soil, bool reset_search);
 		float corrected(float *temperature, float rawLow, float referenceLow, float rawRange, float referenceRange);
-		void scan(byte readPin);
+		void scan(byte readPin); // Not tested yet
  };
  #endif
