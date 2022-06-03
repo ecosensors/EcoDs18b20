@@ -1,6 +1,10 @@
 # EcoDs18b20
  
  Library for the DS18B20 sensors is distributed WITHOUT WARRANTY.
+
+ That library allow you to work with up to 5 DS18B20 sensors which are not on the same bus. You will be able to define the data line pin, the power pin for each sensors tanks to a configurtion file.
+
+ Additionnaly, you will be able to calibrate the sensors.
  
  You will need a pull-up resistor of about 4.7 KOhm between the 1-Wire data line and the 3.3V
 
