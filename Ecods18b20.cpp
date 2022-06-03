@@ -129,7 +129,7 @@ float Ecods18b20::corrected(float *temperature, float rawLow, float referenceLow
 }
 
 
-/*
+
 void Ecods18b20::scan(byte readPin)
 {
 	Serial.print(F("# Scan DS18B20 on BUS ")); Serial.println(readPin);
@@ -189,4 +189,3 @@ void Ecods18b20::scan(byte readPin)
       }while(s < 4);
 }
 
-*/
