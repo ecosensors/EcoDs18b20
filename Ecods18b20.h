@@ -24,7 +24,9 @@ class Ecods18b20{
 
  	private:
  		OneWire* _wire;
-
+ 		int _numberOfConnectedSensors;
+ 		byte _sensorsAddr[4][4][8];
+ 		
 	
 	public:
 		Ecods18b20();
