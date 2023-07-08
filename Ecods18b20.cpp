@@ -37,65 +37,63 @@ int Ecods18b20::get_temperature(OneWire* ds, float *temperature_soil, bool reset
 
 	//Serial.println(F("Getting temperature"));
     
-    delay(500);
-    byte data[9], addr[8];
-    // data[] : Données lues depuis le scratchpad
-    // addr[] : Adresse du module 1-Wire détecté  
-    // Reset le bus 1-Wire ci nécessaire (requis pour la lecture du premier capteur)
+  delay(500);
+  byte data[9], addr[8];
+  // data[] : Données lues depuis le scratchpad
+  // addr[] : Adresse du module 1-Wire détecté  
+  // Reset le bus 1-Wire ci nécessaire (requis pour la lecture du premier capteur)
     
-    if (reset_search) {
-     	_wire->reset_search();
-     }
+  if (reset_search) {
+    _wire->reset_search();
+  }
      
-      // Recherche le prochain capteur 1-Wire disponible
-     if (!_wire->search(addr)) {
-        // Pas de capteur
-        Serial.println(F("No sensor found"));
-     	return 0;
-     }
-     else
-     {
-     	switch (addr[0]) {
-     		case 0x10:
-     			Serial.println("  Chip = DS18S20");  // or old DS1820
-     			break;
-     		case 0x28:
-	     		Serial.println("  Chip = DS18B20");
-	     		break;
-	     	case 0x22:
-	     		Serial.println("  Chip = DS1822");
-	     		break;
-	     	default:
-	     		Serial.println("Device is not a DS18x20 family device.");
-	     		return -2;
-	     } 
+  // Recherche le prochain capteur 1-Wire disponible
+  if (!_wire->search(addr)) {
+    // Pas de capteur
+    Serial.println(F("No sensor found"));
+    return 0;
+  }
+  else
+  {
+    switch (addr[0]) {
+      case 0x10:
+   			Serial.println("  Chip = DS18S20");  // or old DS1820
+     		break;
+     	case 0x28:
+	  		Serial.println("  Chip = DS18B20");
+    		break;
+      case 0x22:
+        Serial.println("  Chip = DS1822");
+	     	break;
+      default:
+        Serial.println("Device is not a DS18x20 family device.");
+        return -2;
+    } 
+  }	
 
-     }	
-    
-      // Vérifie que l'adresse a été correctement reçue 
-     if (OneWire::crc8(addr, 7) != addr[7])
-     {
-     	// Adresse invalide
-     	Serial.println(F("Invalid address"));
-     	return -1;
-     }
+  // Vérifie que l'adresse a été correctement reçue 
+  if (OneWire::crc8(addr, 7) != addr[7])
+  {
+    // Adresse invalide
+    Serial.println(F("Invalid address"));
+    return -1;
+  }
   
-     // Vérifie qu'il s'agit bien d'un DS18B20 
-     if (addr[0] != 0x28)
-     {
-     	Serial.println(F("Invalid sensor"));
-     	return -2;
-     }
+  // Vérifie qu'il s'agit bien d'un DS18B20 
+  if (addr[0] != 0x28)
+  {
+    Serial.println(F("Invalid sensor"));
+    return -2;
+  }
 
-     // the first ROM byte indicates which chip
-	
-     // Reset le bus 1-Wire et sélectionne le capteur
-     _wire->reset();
-     _wire->select(addr);
+  // the first ROM byte indicates which chip
+	// Reset le bus 1-Wire et sélectionne le capteur
+  _wire->reset();
+  _wire->select(addr);
     
-     // Lance une prise de mesure de température et attend la fin de la mesure
-     _wire->write(0x44, 1);
-     delay(800);
+  // Lance une prise de mesure de température et attend la fin de la mesure
+  _wire->write(0x44, 1);
+  delay(800);
     
      // Reset le bus 1-Wire, sélectionne le capteur et envoie une demande de lecture du scratchpad
      _wire->reset();
