@@ -33,7 +33,7 @@ Ecods18b20::Ecods18b20()
 */
 int Ecods18b20::get_temperature(OneWire* ds, float *temperature_soil, bool reset_search)
 {
-	_wire = ds; // Does it makes sens to do it
+  _wire = ds; // Does it makes sens to do it
 
 	//Serial.println(F("Getting temperature"));
     
