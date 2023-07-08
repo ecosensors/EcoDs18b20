@@ -131,10 +131,10 @@ float Ecods18b20::corrected(float *temperature, float rawLow, float referenceLow
 // Not tested yet
 void Ecods18b20::scan(byte readPin)
 {
-	Serial.print(F("# Scan DS18B20 on BUS ")); Serial.println(readPin);
-	OneWire ds(readPin);
-	int s = 0;
-	
+  Serial.print(F("# Scan DS18B20 on BUS ")); Serial.println(readPin);
+  OneWire ds(readPin);
+  int s = 0;
+
   do{
     byte address[8];
     if (!ds.search(address))
