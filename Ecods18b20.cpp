@@ -34,9 +34,9 @@ Ecods18b20::Ecods18b20()
 int Ecods18b20::get_temperature(OneWire* ds, float *temperature_soil, bool reset_search)
 {
   _wire = ds; // Does it makes sens to do it
-
-	//Serial.println(F("Getting temperature"));
-    
+  
+  //Serial.println(F("Getting temperature"));
+  
   delay(500);
   byte data[9], addr[8];
   // data[] : Données lues depuis le scratchpad
