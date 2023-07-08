@@ -15,7 +15,7 @@
  To able to correct the rawValue (the value measured with the sensor), you should previously measure with the sensor, the temperature of the ice water (env.0°) and the boiled water (env. 97°, it depends on the atmospheric pressure) in order to record the values as 'referenceLow' and 'referenceMax'
 
 ```
-float ecods18b20.corrected(float *rawValue, float rawLow, float referenceLow, float rawRange, float referenceRange){}
+float corrected = ecods18b20.corrected(float *rawValue, float rawLow, float referenceLow, float rawRange, float referenceRange)
 ```
 
 * float rawValue        => the temperature return by the DS18B20 sensor
