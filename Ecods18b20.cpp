@@ -96,22 +96,22 @@ int Ecods18b20::get_temperature(OneWire* ds, float *temperature_soil, bool reset
   _wire->write(0x44, 1);
   delay(800);
     
-     // Reset le bus 1-Wire, sélectionne le capteur et envoie une demande de lecture du scratchpad
-     _wire->reset();
-     _wire->select(addr);
-     _wire->write(0xBE);
-   
-      // Lecture du scratchpad
-    for (byte i = 0; i < 9; i++) {
-     	data[i] = _wire->read();
-    }
-    
-    // Calcul de la température en degré Celsius 
-    *temperature_soil = (int16_t) ((data[1] << 8) | data[0]) * 0.0625;
+  // Reset le bus 1-Wire, sélectionne le capteur et envoie une demande de lecture du scratchpad
+  _wire->reset();
+  _wire->select(addr);
+  _wire->write(0xBE);
 
-    // Pas d'erreur
+  // Lecture du scratchpad
+  for (byte i = 0; i < 9; i++)
+  {
+    data[i] = _wire->read();
+  }
 
-    return 1;
+  // Calcul de la température en degré Celsius 
+  *temperature_soil = (int16_t) ((data[1] << 8) | data[0]) * 0.0625;
+
+  // Pas d'erreur
+  return 1;
 }
 
 
@@ -134,57 +134,56 @@ void Ecods18b20::scan(byte readPin)
 	Serial.print(F("# Scan DS18B20 on BUS ")); Serial.println(readPin);
 	OneWire ds(readPin);
 	int s = 0;
-	do{
-		byte address[8];
-		if (!ds.search(address))
+	
+  do{
+    byte address[8];
+    if (!ds.search(address))
+    {
+      ds.reset_search();
+      _numberOfConnectedSensors = s;
+      Serial.print(F("Found "));
+      Serial.print(_numberOfConnectedSensors);
+      Serial.println(F(" sensor(s)"));
+      s=4;  // Leave the loop
+    }
+    else
+    {
+      // DS18B20 has been found
+      Serial.print(F("Found: "));
+      for(byte i = 0; i < 8; ++i)
+      {
+        if (address[i] < 0x10) Serial.write('0');
+        Serial.print(address[i], HEX);
+        _sensorsAddr[readPin][s][i]=address[i];             // Save into an array to use it later
+        Serial.write(' ');
+      }
+      
+      // Check if the address belong to a DS18B20 
+      if (OneWire::crc8(address, 7) != address[7])
+      {
+        Serial.print(F("(CRC invalid)"));
+      }
+      else
+      {
+        switch (address[0])
         {
-          ds.reset_search();
-          _numberOfConnectedSensors = s;
-          Serial.print(F("Found "));
-          Serial.print(_numberOfConnectedSensors);
-          Serial.println(F(" sensor(s)"));
-          s=4;  // Leave the loop
+          case 0x10:
+            Serial.println(F("  Chip = DS18S20"));  // or old DS1820
+            break;
+          case 0x28:
+            Serial.println(F("  Chip = DS18B20"));
+            break;
+          case 0x22:
+            Serial.println(F("  Chip = DS1822"));
+            break;
+          default:
+            Serial.println(F(" Unknow sensor!"));
+            break;
         }
-        else
-        {
-          // DS18B20 has been found
-          Serial.print(F("Found: "));
-          for(byte i = 0; i < 8; ++i)
-          {
-            if (address[i] < 0x10) Serial.write('0');
-            Serial.print(address[i], HEX);
-            _sensorsAddr[readPin][s][i]=address[i];             // Save into an array to use it later
-            Serial.write(' ');
-          }
-
-          // Check if the address belong to a DS18B20 
-          if (OneWire::crc8(address, 7) != address[7])
-          {
-            Serial.print(F("(CRC invalid)"));
-          }
-          else
-          {
-          	
-	        switch (address[0]) {
-	           case 0x10:
-	                Serial.println(F("  Chip = DS18S20"));  // or old DS1820
-	             	break;
-	            case 0x28:
-	                Serial.println(F("  Chip = DS18B20"));
-	             	break;
-	            case 0x22:
-	                Serial.println(F("  Chip = DS1822"));
-	             	break;
-	             default:
-	             	Serial.println(F(" Unknow sensor!"));
-	             	break;
-	        }   
-      		
-          }
-          s++;
-          // END
-          //Serial.println();
-        }
-      }while(s < 4);
+      }
+      s++;
+      // END
+      //Serial.println();
+    }
+  }while(s < 4);
 }
-
