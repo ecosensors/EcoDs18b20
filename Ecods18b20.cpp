@@ -55,10 +55,11 @@ int Ecods18b20::get_temperature(OneWire* ds, float *temperature_soil, bool reset
   }
   else
   {
-    switch (addr[0]) {
+    switch (addr[0])
+    {
       case 0x10:
-   			Serial.println("  Chip = DS18S20");  // or old DS1820
-     		break;
+        Serial.println("  Chip = DS18S20");  // or old DS1820
+        break;
      	case 0x28:
 	  		Serial.println("  Chip = DS18B20");
     		break;
