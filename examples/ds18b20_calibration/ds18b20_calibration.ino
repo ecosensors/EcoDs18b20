@@ -24,10 +24,10 @@
 
 #include <OneWire.h>
 #include <Ecods18b20.h>
-#include "PCF8574.h"
+#include "PCF8574.h"            // Comment that line of you do not use a PCF8574
 
 bool powerWhenHigh = true;
-int powerPin = 4;           // select the pin used with the PCF8574 to power the sensor
+int powerPin = 4;               // select the pin used with the PCF8574 to power the sensor
 byte pinRead=19; //A1
 
 // Change the values after you measured the iced and boiled water with the sensor and an accurate termometer
@@ -38,7 +38,7 @@ float refMax = 97.6;            // accurate termometer
 float rawRange = tMax-tMin;
 float refRange = refMax-refMin;
 
-OneWire ds(pinRead); // read the sensors at the pin19 (A1)
+OneWire ds(pinRead);            // read the sensors at the pin19 (A1)
 Ecods18b20 ecods18b20;
 PCF8574 expander;
 
@@ -58,6 +58,7 @@ void setup() {
   Serial.println(F("==================="));
 
   pinMode(pinRead, INPUT_PULLUP);
+  //pinMode(powerPin, OUTPUT)
   
   /*
   * PCF8574
@@ -82,6 +83,7 @@ void setup() {
     delay(50);
     //delayMicroseconds(50000);
   }
+  // END PCF8574
 }
 
 void loop() {
