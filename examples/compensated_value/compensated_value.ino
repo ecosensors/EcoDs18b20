@@ -28,7 +28,7 @@
 
 bool powerWhenHigh = true;
 int powerPin = 4;               // select the pin used with the PCF8574 to power the sensor
-byte pinRead=19; //A1
+byte pinRead=19;                // A1
 
 // Change the values after you measured the iced and boiled water with the sensor and an accurate termometer
 float tMin = 16;                // Sensor value
@@ -38,11 +38,9 @@ float refMax = 97.6;            // accurate termometer
 float rawRange = tMax-tMin;
 float refRange = refMax-refMin;
 
-OneWire ds(pinRead);            // read the sensors at the pin19 (A1)
+OneWire ds(pinRead);  
 Ecods18b20 ecods18b20;
 PCF8574 expander;
-
-
 
 void setup() {
   Serial.begin(9600);
